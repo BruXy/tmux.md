@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+% Convert tmux cheatsheet to PDF                                              %
+%                                                                             %
+% tmux.md original repository https://gist.github.com/andreyvit/2921703       %
+%                                                                             %
+% Author: Martin 'BruXy' Bruchanov, bruchy at gmail.com                       %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\papersize{letter} % use 'letter'
+%\def\papersize{A4}     % use 'A4'
+\def\letter{letter}
+
+\language[en]
+
+% 'ifx' compares if two macros will expand to the same output,
+% used here for string comparison in \papersize and \letter.
+\ifx\papersize\letter
+    % Letter page size settings
+    \setupbodyfont[9pt]
+    \setuppapersize[letter, portrait][ledger, landscape]
+    \setuplayout[%
+        width=205mm,%
+        height=265mm,%
+        header=0mm, %
+        footer=0mm, %
+        topspace=5mm, %
+        leftmargin=0mm, %
+        rightmargin=0mm, %
+        leftedge=0mm,
+        backspace=10mm,
+    ]
+\else
+    % A4 page size settings
+    \setupbodyfont[9.5pt]  %
+    \setuppapersize[A4, portrait][A3, landscape]
+    \setuplayout[%
+        width=200mm,%
+        height=286mm,%
+        header=0mm, %
+        footer=0mm, %
+        topspace=5mm, %
+        leftmargin=0mm, %
+        rightmargin=0mm, %
+        leftedge=0mm,
+        backspace=10mm,
+    ]
+\fi
+
+\setuparranging[2SIDE]
+\setuppagenumbering[state=none]
+
+\definefont[SectionFont][SansBold sa 1.5]
+\definefont[SubsectionFont][SansBold sa 1.2]
+
+\define[1]\Numbering{{#1}.}
+
+\setuphead[section][
+    style=\SectionFont,
+    numbercommand=\Numbering,
+]
+
+\setuphead[subsection][
+    style=\SubsectionFont,
+    numbercommand=\Numbering,
+]
+
+\starttext
+    \input tmux-text.ctex
+\stoptext
+
